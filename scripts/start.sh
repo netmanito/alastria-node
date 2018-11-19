@@ -94,13 +94,13 @@ fi
 echo "[*] Starting quorum node"
 if [[ "$NODE_TYPE" == "general" ]]; then
   if [[ ! -z "$CONSTELLATION" ]]; then
-      nohup env PRIVATE_CONFIG=~/alastria/data/constellation/constellation.conf geth --datadir ~/alastria/data $GLOBAL_ARGS 2>> ~/alastria/logs/quorum_"${_TIME}".log &
+      nohup env PRIVATE_CONFIG=~/alastria/data/constellation/constellation.conf geth --datadir ~/alastria/data $GLOBAL_ARGS 2>> ~/alastria/logs/quorum.log &
     else
-      nohup env geth --datadir ~/alastria/data $GLOBAL_ARGS 2>> ~/alastria/logs/quorum_"${_TIME}".log &
+      nohup env geth --datadir ~/alastria/data $GLOBAL_ARGS 2>> ~/alastria/logs/quorum.log &
 fi
 else
     if [[ "$NODE_TYPE" == "validator" ]]; then
-        nohup geth --datadir ~/alastria/data $GLOBAL_ARGS --maxpeers 100 --mine --minerthreads $(grep -c "processor" /proc/cpuinfo) 2>> ~/alastria/logs/quorum_"${_TIME}".log &
+        nohup geth --datadir ~/alastria/data $GLOBAL_ARGS --maxpeers 100 --mine --minerthreads $(grep -c "processor" /proc/cpuinfo) 2>> ~/alastria/logs/quorum.log &
     fi
 fi
 
@@ -116,7 +116,7 @@ fi
 
 if ([ $WATCH -gt 0 ])
 then
-  tail -100f ~/alastria/logs/quorum_"${_TIME}".log
+  tail -100f ~/alastria/logs/quorum.log
 fi
 
 set +u
